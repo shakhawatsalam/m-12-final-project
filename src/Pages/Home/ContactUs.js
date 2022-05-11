@@ -13,9 +13,9 @@ const ContactUs = () => {
                 <h1 className='text-center text-2xl text-primary mt-10'>Contact Us</h1>
                 <p className='text-center text-4xl text-white font-thin'>Stay connected with us</p>
                 <div className='grid grid-cols-1 justify-items-center gap-5 mt-10'>
-                    <input className='block' type="text" placeholder="Email Address" class="input input-bordered w-full max-w-xs" />
-                    <input className='block' type="text" placeholder="Subject" class="input input-bordered w-full max-w-xs" />
-                    <textarea className='block' type="text" placeholder="Your message" class="input input-bordered w-full max-w-xs" />
+                    <input type="text" placeholder="Email Address" className="input input-bordered w-full max-w-xs" />
+                    <input  type="text" placeholder="Subject" className="input input-bordered w-full max-w-xs" />
+                    <textarea  type="text" placeholder="Your message" className="input input-bordered w-full max-w-xs lg:w-[450px] lg:h-[100px]" />
                     <PrimaryButton>Submit</PrimaryButton>
                 </div>
             </div>
