@@ -8,19 +8,19 @@ import Exceptional from './Exceptional';
 const Services = () => {
     const services = [
         {
-            _id: 1, 
+            _id: 1,
             name: "Fluride Treatment",
             description: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable.',
             img: fluoride
         },
         {
-            _id: 2, 
+            _id: 2,
             name: "Cavity Filling",
             description: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable.',
             img: cavity
         },
         {
-            _id: 3, 
+            _id: 3,
             name: "Theeth Whitening",
             description: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable.',
             img: whitening
@@ -36,7 +36,7 @@ const Services = () => {
                 {
                     services.map(service => <Service
                         key={service._id}
-                        service = {service}
+                        service={service}
                     ></Service>)
                 }
             </div>
