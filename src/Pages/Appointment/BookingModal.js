@@ -6,6 +6,7 @@ import auth from '../../firebase.init';
 
 const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
     const { _id, name, slots } = treatment;
+    console.log(refetch);
     const [user] = useAuthState(auth);
     const formattedDate = format(date, 'PP');
 
@@ -52,11 +53,13 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
                         draggable: true,
                         progress: undefined,
                     });
+
                 }
                 // to close the modal 
+                setTreatment(null);
                 refetch();
-                setTreatment(null)
             })
+
     }
 
     return (
