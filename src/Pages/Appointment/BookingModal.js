@@ -1,9 +1,10 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 
-const BookingModal = ({ treatment, date, setTreatment }) => {
+const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
     const { _id, name, slots } = treatment;
     const [user] = useAuthState(auth);
     const formattedDate = format(date, 'PP');
@@ -11,17 +12,51 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
     const handleBooking = event => {
         event.preventDefault();
         const slot = event.target.slot.value;
-        console.log(_id, name, slot);
+        // console.log(_id, name, slot);
         const booking = {
-            treatmentId: _id, 
+            treatmentId: _id,
             treatment: name,
-            slot, 
+            date: formattedDate,
+            slot,
             patient: user.email,
             patientName: user.displayName,
             phone: event.target.phone.value
         }
-        // to close the modal 
-        setTreatment(null)
+
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    toast.success(`Successfully Booked, ${formattedDate} at ${slot}`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                } else {
+                    toast.error(`You already Booked, ${data.booking?.date} at ${data.booking?.slot}`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+                // to close the modal 
+                refetch();
+                setTreatment(null)
+            })
     }
 
     return (
